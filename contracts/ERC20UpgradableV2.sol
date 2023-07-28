@@ -59,6 +59,10 @@ contract ERC20UpgradableV2 is Initializable, ERC20Upgradeable, ERC20BurnableUpgr
         _mint(to, amount);
     }
 
+    function withdraw() public onlyOwner {
+        payable(msg.sender).transfer(address(this).balance);
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 amount)
         internal
         whenNotPaused
