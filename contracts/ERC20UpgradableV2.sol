@@ -30,7 +30,7 @@ contract ERC20UpgradableV2 is Initializable, ERC20Upgradeable, ERC20BurnableUpgr
     }
 
     function initialize() initializer public {
-        __ERC20_init("ERC20Upgradable", "EUC");
+        __ERC20_init("PELE", "PLE");
         __ERC20Burnable_init();
         __Pausable_init();
         __Ownable_init();
@@ -49,18 +49,21 @@ contract ERC20UpgradableV2 is Initializable, ERC20Upgradeable, ERC20BurnableUpgr
     }
 
     function buy(uint256 _amount) public payable {
-        require(msg.value == _amount * mintPrice, 'Need to send exact amount of wei');
+        require(msg.value == (_amount / 1 ether) * mintPrice, 'Need to send exact amount of wei');
 
         _mint(msg.sender, _amount);
     }
-
-    function mint(address to, uint256 amount) public {
-        require(verifyUser(to));
+    
+    function mint(address to, uint256 amount) public onlyOwner {
         _mint(to, amount);
     }
 
     function withdraw() public onlyOwner {
         payable(msg.sender).transfer(address(this).balance);
+    }
+
+    function name() public view virtual override returns (string memory) {
+        return "PELE";
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 amount)

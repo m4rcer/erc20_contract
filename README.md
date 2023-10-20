@@ -13,11 +13,16 @@ npx hardhat run scripts/deploy.js
 
 npx hardhat run scripts/deploy.js --network goerli
 npx hardhat run scripts/upgrade.js --network goerli
+npx hardhat run scripts/mint.js --network bsc
 
 npx hardhat console --network goerli
 
-const Contract = await ethers.getContractFactory('ERC20UpgradableV1');
-const contract = await Contract.attach('0x08c45189c51E6E01dbf2902E07dE5cC1FB5e660A');
+const Contract = await ethers.getContractFactory('ERC20UpgradableV2');
+const contract = await Contract.attach('0x000042CE27f2A2F45396F35622da3A8c2085944a');
+await contract.setPrice('31000000000000');
 
+const Contract = await ethers.getContractFactory('ERC20UpgradableV2');
+const contract = await Contract.attach('0xEf90092CF9B435593e7c326c62Cf0bcB59E737ae');
+await contract.setPrice('27000');
 ```
 

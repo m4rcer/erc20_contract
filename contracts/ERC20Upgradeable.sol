@@ -14,7 +14,7 @@ contract ERC20UpgradableV1 is Initializable, ERC20Upgradeable, ERC20BurnableUpgr
     }
 
     function initialize() initializer public {
-        __ERC20_init("ERC20Upgradable", "EUC");
+        __ERC20_init("ERC20Upgradable", "PLE");
         __ERC20Burnable_init();
         __Pausable_init();
         __Ownable_init();
